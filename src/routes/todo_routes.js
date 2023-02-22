@@ -2,27 +2,38 @@ const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
 const Todos = require("../models/todos");
+const logger = require("../utils/logger");
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get("/registros", async (req, res) => {
-  let all_tasks = await Promise.resolve(Todos.findAll());
-  res.json(all_tasks);
+  try {
+    let all_tasks = await Promise.resolve(Todos.findAll());
+    res.json(all_tasks);
+  } catch (error) {
+    logger.error(error);
+  }
 });
 
 router.get("/registros/:id", async (req, res) => {
-  let id = req.params.id;
-  let task = await Promise.resolve(Todos.findOne({ where: { id: id } }));
-  res.json(task);
+  try {
+    let task = await Promise.resolve(Todos.findByPk(req.params.id));
+    res.json(task);
+  } catch (error) {
+    logger.error(error);
+  }
 });
 
 router.post("/registros", (req, res) => {
-  let new_task = req.body.task;
-  const task = Todos.create({
-    task: new_task,
-  });
-
-  res.send(`Task ${new_task} added to the database!`);
+  try {
+    let new_task = Todos.create({
+      task: req.body.task,
+    });
+    res.send(`Task ${new_task} added to the database!`);
+  } catch (error) {
+    logger.error(error);
+    res.error(error);
+  }
 });
 
 module.exports = router;
