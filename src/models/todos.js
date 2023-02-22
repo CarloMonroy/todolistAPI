@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
-const sequelize = new Sequelize("mysql://test:test@mysql:3306/tododb");
+const sequelize = new Sequelize(
+  "mysql://root:FlisrTniB3gRNVyZmGXC@containers-us-west-109.railway.app:6382/railway"
+);
 
 const Todos = sequelize.define("Todos", {
   id: {

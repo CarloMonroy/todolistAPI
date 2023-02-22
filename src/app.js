@@ -8,7 +8,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-const sequelize = new Sequelize("mysql://test:test@mysql:3306/tododb");
+const sequelize = new Sequelize(
+  "mysql://root:FlisrTniB3gRNVyZmGXC@containers-us-west-109.railway.app:6382/railway"
+);
 
 try {
   sequelize.authenticate();
