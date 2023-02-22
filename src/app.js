@@ -27,5 +27,5 @@ app.use("", require("./routes/todo_routes"));
 app.use(morganMiddleware);
 
 app.listen(PORT, () => {
-  logger.info("Server started on port 3000");
+  logger.info("Server started on port " + PORT + "");
 });
