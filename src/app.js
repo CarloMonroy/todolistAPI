@@ -4,6 +4,7 @@ const logger = require("./utils/logger");
 // import orm
 const { Sequelize } = require("sequelize");
 const dotenv = require("dotenv");
+const PORT = process.env.PORT || 3000;
 
 dotenv.config();
 
@@ -25,6 +26,6 @@ app.use("", require("./routes/todo_routes"));
 // use morgan middleware
 app.use(morganMiddleware);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   logger.info("Server started on port 3000");
 });
