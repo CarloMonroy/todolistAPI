@@ -26,13 +26,15 @@ router.get("/registros/:id", async (req, res) => {
 
 router.post("/registros", async (req, res) => {
   try {
-    let new_task = await Todos.create({
-      task: req.body.task,
-    });
+    let new_task = await Promise.resolve(
+      Todos.create({
+        task: req.body.task,
+      })
+    );
     res.send(`Task ${new_task} added to the database!`);
   } catch (error) {
     logger.error(error);
-    res.error(error);
+    console.log(error);
   }
 });
 
