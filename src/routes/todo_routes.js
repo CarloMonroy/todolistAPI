@@ -60,7 +60,7 @@ router.patch("/registros/:id", (req, res) => {
 
 router.delete("/registros/:id", (req, res) => {
   try {
-    let task = resolve(Todos.destroy({ where: { id: req.params.id } }));
+    let task = Todos.destroy({ where: { id: req.params.id } });
     let all_tasks = Todos.findAll();
     res.json(all_tasks);
   } catch (error) {
