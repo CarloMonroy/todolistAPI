@@ -58,14 +58,17 @@ router.patch("/registros/:id", (req, res) => {
   }
 });
 
-router.delete("/registros/:id", (req, res) => {
+router.delete("/registros/:id", async (req, res) => {
   try {
-    let task = Todos.destroy({ where: { id: req.params.id } });
-    let all_tasks = Todos.findAll();
+    let task = await Todos.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    let all_tasks = await Todos.findAll();
     res.json(all_tasks);
   } catch (error) {
     logger.error(error);
-    console.log(error);
   }
 });
 
