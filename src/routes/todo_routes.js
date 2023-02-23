@@ -36,11 +36,9 @@ router.post("/registros", (req, res) => {
   }
 });
 
-router.patch("/registros/:id", (req, res) => {
+router.patch("/registros/:id", async (req, res) => {
   try {
-    console.log(req.body);
-    console.log(req.params.id);
-    let task = Todos.update(
+    let task = await Todos.update(
       {
         task: req.body.task,
       },
@@ -50,7 +48,7 @@ router.patch("/registros/:id", (req, res) => {
         },
       }
     );
-    let all_tasks = Todos.findAll();
+    let all_tasks = await Todos.findAll();
     res.json(all_tasks);
   } catch (error) {
     logger.error(error);
@@ -60,6 +58,7 @@ router.patch("/registros/:id", (req, res) => {
 
 router.delete("/registros/:id", async (req, res) => {
   try {
+    console.log(req.params.id);
     let task = await Todos.destroy({
       where: {
         id: req.params.id,
