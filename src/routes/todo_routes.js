@@ -36,4 +36,23 @@ router.post("/registros", (req, res) => {
   }
 });
 
+router.patch("/registros", (req, res) => {
+  try {
+    let task = Todos.update(
+      {
+        task: req.body.task,
+      },
+      {
+        where: {
+          id: req.body.id,
+        },
+      }
+    );
+    res.send(`Task ${task} updated in the database!`);
+  } catch (error) {
+    logger.error(error);
+    res.error(error);
+  }
+});
+
 module.exports = router;
