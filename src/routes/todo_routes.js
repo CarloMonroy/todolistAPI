@@ -65,7 +65,7 @@ router.delete("/registros/:id", (req, res) => {
     res.json(all_tasks);
   } catch (error) {
     logger.error(error);
-    res.error(error);
+    console.log(error);
   }
 });
 
