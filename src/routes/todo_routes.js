@@ -58,4 +58,17 @@ router.patch("/registros/:id", async (req, res) => {
   }
 });
 
+router.delete("/registros/:id", async (req, res) => {
+  try {
+    let task = await Promise.resolve(
+      Todos.destroy({ where: { id: req.params.id } })
+    );
+    let all_tasks = await Promise.resolve(Todos.findAll());
+    res.json(all_tasks);
+  } catch (error) {
+    logger.error(error);
+    res.error(error);
+  }
+});
+
 module.exports = router;
