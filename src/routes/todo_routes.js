@@ -38,6 +38,8 @@ router.post("/registros", (req, res) => {
 
 router.patch("/registros/:id", async (req, res) => {
   try {
+    console.log(req.body.task);
+    console.log(typeof req.params.id);
     let task = await Todos.update(
       {
         task: req.body.task,
@@ -58,7 +60,6 @@ router.patch("/registros/:id", async (req, res) => {
 
 router.delete("/registros/:id", async (req, res) => {
   try {
-    console.log(req.params.id);
     let task = await Todos.destroy({
       where: {
         id: req.params.id,
