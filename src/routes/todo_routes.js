@@ -40,6 +40,7 @@ router.post("/registros", async (req, res) => {
 
 router.patch("/registros/:id", async (req, res) => {
   try {
+    console.log("recibida peticion patch");
     console.log(req.body.task);
     console.log(typeof req.params.id);
     let task = await Todos.update(
@@ -52,7 +53,7 @@ router.patch("/registros/:id", async (req, res) => {
         },
       }
     );
-    let all_tasks = await Todos.findAll();
+    let all_tasks = await Promise.resolve(Todos.findAll());
     res.json(all_tasks);
   } catch (error) {
     logger.error(error);
