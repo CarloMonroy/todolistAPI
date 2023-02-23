@@ -38,6 +38,9 @@ router.post("/registros", (req, res) => {
 
 router.patch("/registros", async (req, res) => {
   try {
+    console.log(req.body);
+    console.log(req.body.id);
+    console.log(req.body.task);
     let task = Todos.update(
       {
         task: req.body.task,
