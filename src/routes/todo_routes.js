@@ -36,7 +36,7 @@ router.post("/registros", (req, res) => {
   }
 });
 
-router.patch("/registros", (req, res) => {
+router.patch("/registros", async (req, res) => {
   try {
     let task = Todos.update(
       {
@@ -48,7 +48,8 @@ router.patch("/registros", (req, res) => {
         },
       }
     );
-    res.send(`Task ${task} updated in the database!`);
+    let all_tasks = await Promise.resolve(Todos.findAll());
+    res.json(all_tasks);
   } catch (error) {
     logger.error(error);
     res.error(error);
