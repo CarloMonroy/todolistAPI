@@ -36,7 +36,7 @@ router.post("/registros", (req, res) => {
   }
 });
 
-router.patch("/registros/:id", async (req, res) => {
+router.patch("/registros/:id", (req, res) => {
   try {
     console.log(req.body);
     console.log(req.params.id);
@@ -50,7 +50,7 @@ router.patch("/registros/:id", async (req, res) => {
         },
       }
     );
-    let all_tasks = await Promise.resolve(Todos.findAll());
+    let all_tasks = Todos.findAll();
     res.json(all_tasks);
   } catch (error) {
     logger.error(error);
@@ -58,12 +58,10 @@ router.patch("/registros/:id", async (req, res) => {
   }
 });
 
-router.delete("/registros/:id", async (req, res) => {
+router.delete("/registros/:id", (req, res) => {
   try {
-    let task = await Promise.resolve(
-      Todos.destroy({ where: { id: req.params.id } })
-    );
-    let all_tasks = await Promise.resolve(Todos.findAll());
+    let task = resolve(Todos.destroy({ where: { id: req.params.id } }));
+    let all_tasks = Todos.findAll();
     res.json(all_tasks);
   } catch (error) {
     logger.error(error);
